@@ -42,7 +42,7 @@ namespace itg
     public:
         typedef shared_ptr<TubeAction> Ptr;
         
-        static const ofVec3f NORMALS[];
+        static const glm::vec3 NORMALS[];
         static const ofIndexType INDICES[];
         
         Branch::Ptr step(Branch::Ptr branch, ofMesh& mesh);
@@ -57,9 +57,9 @@ namespace itg
         // vertices per slice
         unsigned resolution;
         
-        vector<ofVec3f> vertices;
-        vector<ofVec3f> normals;
-        vector<ofVec2f> texCoords;
+        vector<glm::vec3> vertices;
+        vector<glm::vec3> normals;
+        vector<glm::vec2> texCoords;
         ofFloatColor colour;
     };
 }

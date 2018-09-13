@@ -127,8 +127,8 @@ namespace itg
     {
         for (int i = 0; i < mesh.getNumVertices(); ++i)
         {
-            ofVec3f vertex = mesh.getVertex(i);
-            ofVec3f normal = mesh.getNormal(i);
+            glm::vec3 vertex = mesh.getVertex(i);
+            glm::vec3 normal = mesh.getNormal(i);
             
             ofDrawLine(vertex, vertex + size * normal);
         }

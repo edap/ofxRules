@@ -41,7 +41,7 @@ namespace itg
     Branch::Ptr IcosphereAction::step(Branch::Ptr branch, ofMesh& mesh)
     {
         Branch::Ptr newBranch = TransformAction::step(branch, mesh);
-        ofMatrix4x4 normalMatrix = inverseTranspose(newBranch->getTransform());
+        glm::mat4 normalMatrix = inverseTranspose(newBranch->getTransform());
         for (unsigned i = 0; i < icoMesh.getNumIndices(); ++i)
         {
             mesh.addIndex(icoMesh.getIndex(i) + mesh.getNumVertices());

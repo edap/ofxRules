@@ -36,8 +36,8 @@ namespace itg
     Branch::Ptr LineAction::step(Branch::Ptr branch, ofMesh& mesh)
     {
         Branch::Ptr newBranch = TransformAction::step(branch, mesh);
-        mesh.addVertex(ofVec3f() * newBranch->getPrevTransform());
-        mesh.addVertex(ofVec3f() * newBranch->getTransform());
+        mesh.addVertex(glm::vec3(0,0,0) * newBranch->getPrevTransform());
+        mesh.addVertex(glm::vec3(0,0,0) * newBranch->getTransform());
         return newBranch;
     }
 }

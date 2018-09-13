@@ -44,7 +44,7 @@ namespace itg
         
         static const unsigned NUM_INDICES = 6;
         static const ofIndexType INDICES[NUM_INDICES];
-        static const ofVec3f NORMAL;
+        static const glm::vec3 NORMAL;
         
         Branch::Ptr step(Branch::Ptr branch, ofMesh& mesh);
     
@@ -55,7 +55,7 @@ namespace itg
     private:
         ofFloatColor colour;
         float w, d;
-        vector<ofVec3f> vertices;
-        ofVec3f normal;
+        vector<glm::vec3> vertices;
+        glm::vec3 normal;
     };
 }

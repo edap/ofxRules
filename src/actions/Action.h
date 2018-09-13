@@ -65,7 +65,7 @@ namespace itg
         
     protected:
         // get the normal matrix
-        static ofMatrix4x4 inverseTranspose(const ofMatrix4x4& transform);
+        static glm::mat4 inverseTranspose(const glm::mat4& transform);
         // these functions are part of ofMesh in 0.8
         static ofMesh icosahedron(float radius);
         static ofMesh icosphere(float radius, int iterations);

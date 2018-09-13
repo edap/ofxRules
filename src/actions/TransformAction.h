@@ -42,7 +42,7 @@ namespace itg
     public:
         typedef shared_ptr<TransformAction> Ptr;
         
-        TransformAction(const string& nextRuleName = "", const ofMatrix4x4& transform = ofMatrix4x4());
+        TransformAction(const string& nextRuleName = "", const glm::mat4& transform = glm::mat4());
         
         virtual Branch::Ptr step(Branch::Ptr branch, ofMesh& mesh);
         
@@ -50,21 +50,21 @@ namespace itg
         void translate(const ofVec3f& translation);
         void translate(float x, float y, float z);
         
-        void rotate(const ofQuaternion& rotation);
-        void rotate(const ofVec3f& euler);
+        void rotate(const glm::quat& rotation);
+        void rotate(const glm::vec3& euler);
         void rotate(float x, float y, float z);
         
-        void scale(const ofVec3f& scale);
+        void scale(const glm::vec3& scale);
         void scale(float scale);
         
-        ofMatrix4x4 getTransform() const { return transform; }
-        void setTransform(const ofMatrix4x4& transform) { this->transform = transform; }
+        glm::mat4 getTransform() const { return transform; }
+        void setTransform(const glm::mat4& transform) { this->transform = transform; }
         
         void load(ofxXmlSettings& xml, const string& tagName, unsigned tagIdx);
         //void save(ofxXmlSettings& xml, const string& tagName);
         
     private:
         void parseTransforms(const string& transforms);
-        ofMatrix4x4 transform;
+        glm::mat4 transform;
     };
 }

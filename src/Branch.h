@@ -40,14 +40,14 @@ namespace itg
     public:
         typedef shared_ptr<Branch> Ptr;
         
-        Branch(const string& ruleName, unsigned depth = 0, const ofMatrix4x4& transform = ofMatrix4x4(),
-               const ofMatrix4x4& prevTransform = ofMatrix4x4(), const string& actionName = "");
+        Branch(const string& ruleName, unsigned depth = 0, const glm::mat4& transform = glm::mat4(),
+               const glm::mat4& prevTransform = glm::mat4(), const string& actionName = "");
         
         string getNextRuleName() const { return nextRuleName; }
         
-        ofMatrix4x4 getTransform() const { return transform; }
+        glm::mat4 getTransform() const { return transform; }
         
-        ofMatrix4x4 getPrevTransform() const { return prevTransform; }
+        glm::mat4 getPrevTransform() const { return prevTransform; }
         
         string getActionName() const { return actionName; }
         
@@ -61,8 +61,8 @@ namespace itg
         unsigned depth;
         unsigned vertexIndex;
         string nextRuleName;
-        ofMatrix4x4 transform;
-        ofMatrix4x4 prevTransform;
+        glm::mat4 transform;
+        glm::mat4 prevTransform;
         map<string, float> params;
     };
 }

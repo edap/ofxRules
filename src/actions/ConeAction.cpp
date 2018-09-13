@@ -36,30 +36,30 @@ namespace itg
     void ConeAction::setParameters(float radius, float height, unsigned resolution)
     {
         coneMesh = Action::cone(radius, height, resolution + 1);
-        ofVec3f direction = ((ofVec3f() * getTransform()) - ofVec3f()).getNormalized();
-        ofMatrix4x4 r;
-        r.makeRotationMatrix(ofVec3f(0, 1, 0), direction);
+        glm::vec3 direction = ((glm::vec4() * getTransform()) - glm::normalize(glm::vec4()));
+        glm::mat4 r;
+        r.makeRotationMatrix(glm::vec3(0, 1, 0), direction);
         r.rotate(180, 1, 0, 0);
         for (unsigned i = 0; i < coneMesh.getNumVertices(); ++i)
         {
-            coneMesh.setVertex(i, coneMesh.getVertex(i) * r);
-            coneMesh.setNormal(i, coneMesh.getNormal(i) * r);
+            coneMesh.setVertex(i, glm::vec4(coneMesh.getVertex(i), 1.0) * r);
+            coneMesh.setNormal(i, glm::vec4(coneMesh.getNormal(i), 1.0) * r);
         }
     }
     
     Branch::Ptr ConeAction::step(Branch::Ptr branch, ofMesh& mesh)
     {
         Branch::Ptr newBranch = TransformAction::step(branch, mesh);
-        ofMatrix4x4 normalMatrix = inverseTranspose(newBranch->getTransform());
+        glm::mat4 normalMatrix = inverseTranspose(newBranch->getTransform());
         for (unsigned i = 0; i < coneMesh.getNumIndices(); ++i)
         {
             mesh.addIndex(coneMesh.getIndex(i) + mesh.getNumVertices());
         }
         for (unsigned i = 0; i < coneMesh.getNumVertices(); ++i)
         {
-            mesh.addVertex(coneMesh.getVertex(i) * newBranch->getTransform());
-            mesh.addNormal(coneMesh.getNormal(i) * normalMatrix);
-            mesh.addTexCoord(ofVec2f(0.f, branch->getDepth()));
+            mesh.addVertex(glm::vec4(coneMesh.getVertex(i), 1.0) * newBranch->getTransform());
+            mesh.addNormal(glm::vec4(coneMesh.getNormal(i), 1.0) * normalMatrix);
+            mesh.addTexCoord(glm::vec2(0.f, branch->getDepth()));
             mesh.addColor(colour);
         }
         //newBranch->setVertexIndex(mesh.getNumVertices());

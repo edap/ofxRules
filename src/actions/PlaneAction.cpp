@@ -33,7 +33,7 @@
 
 namespace itg
 {
-    const ofVec3f PlaneAction::NORMAL = ofVec3f(0.f, 1.f, 0.f);
+    const glm::vec3 PlaneAction::NORMAL = glm::vec3(0.f, 1.f, 0.f);
     const ofIndexType PlaneAction::INDICES[] = { 0, 1, 3, 3, 1, 2 };
     
     void PlaneAction::setParameters(float w, float d)
@@ -41,16 +41,16 @@ namespace itg
         this->w = w;
         this->d = d;
         vertices.clear();
-        vertices.push_back(ofVec3f(-0.5 * w, 0.f, 0.5 * d));
-        vertices.push_back(ofVec3f(-0.5 * w, 0.f, -0.5 * d));
-        vertices.push_back(ofVec3f(0.5 * w, 0.f, -0.5 * d));
-        vertices.push_back(ofVec3f(0.5 * w, 0.f, 0.5 * d));
+        vertices.push_back(glm::vec3(-0.5 * w, 0.f, 0.5 * d));
+        vertices.push_back(glm::vec3(-0.5 * w, 0.f, -0.5 * d));
+        vertices.push_back(glm::vec3(0.5 * w, 0.f, -0.5 * d));
+        vertices.push_back(glm::vec3(0.5 * w, 0.f, 0.5 * d));
     }
     
     Branch::Ptr PlaneAction::step(Branch::Ptr branch, ofMesh& mesh)
     {
         Branch::Ptr newBranch = TransformAction::step(branch, mesh);
-        ofMatrix4x4 normalMatrix = inverseTranspose(newBranch->getTransform());
+        glm::mat4 normalMatrix = inverseTranspose(newBranch->getTransform());
         for (unsigned i = 0; i < NUM_INDICES; ++i)
         {
             mesh.addIndex(INDICES[i] + mesh.getNumVertices());
@@ -59,7 +59,7 @@ namespace itg
         {
             mesh.addVertex(vertices[i] * newBranch->getTransform());
             mesh.addNormal(NORMAL * normalMatrix);
-            mesh.addTexCoord(ofVec2f(0.f, branch->getDepth()));
+            mesh.addTexCoord(glm::vec2(0.f, branch->getDepth()));
             mesh.addColor(colour);
         }
         return newBranch;
